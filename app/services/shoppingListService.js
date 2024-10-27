@@ -44,7 +44,7 @@ const countAllShoppingLists = async () => {
 // Function to count all items
 const countAllItems = async () => {
     const result =
-        await sql`SELECT COUNT(*)::int AS count FROM shopping_list_items `;
+        await sql`SELECT COUNT(*)::int AS count FROM shopping_list_items WHERE shopping_list_id IN (SELECT id FROM shopping_lists WHERE active = TRUE) `;
     return result[0].count; // Access the count from the result structure
 };
 
