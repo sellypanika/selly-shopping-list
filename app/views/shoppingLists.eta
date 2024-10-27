@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Lists</title>
+</head>
+<body>
+<% layout("./layouts/layout.eta") %>
+    <h1>Shopping Lists</h1>
+
+    <h2>Add a shopping list</h2>
+    <form method="POST" action="/lists">
+        Name: <input type="text" name="name" required />
+        <input type="submit" value="Create shopping list!" />
+    </form>
+
+    <h2>Active shopping lists</h2>
+    <ul>
+        <% if (it.shoppingLists.length > 0) { %>
+            <% it.shoppingLists.forEach((list) => { %>
+                <li>
+                    <strong><a href="/lists/<%= list.id %>"><%= list.name %></a></strong>
+                    <form method="POST" action="/lists/<%= list.id %>/deactivate" style="display:inline;">
+                        <input type="submit" value="Deactivate list!" />
+                    </form>
+                    <ul>
+                        <% if (list.items && list.items.length > 0) { %>
+                            <% list.items.forEach((item) => { %>
+                                <li>
+                                    <%= item.name %> - Collected: <%= item.collected ? "Yes" : "No" %>
+                                </li>
+                            <% }); %>
+                        <% } else { %>
+                            <li>No items in this shopping list.</li>
+                        <% } %>
+                    </ul>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li>No active shopping lists.</li>
+        <% } %>
+    </ul>
+       <a href="/">Back to Main Page</a>
+</body>
+</html>

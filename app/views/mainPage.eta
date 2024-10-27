@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Shopping Lists</title>
+</head>
+<body>
+<% layout("./layouts/layout.eta") %>
+    <h1>Shared Shopping Lists</h1>
+    <ul>
+        <% if (it.shoppingListCount !== undefined && it.shoppingListItemCount !== undefined) { %>
+            <li>Shopping lists: <%= it.shoppingListCount %></li>
+            <li>Shopping list items: <%= it.shoppingListItemCount %></li>
+        <% } else { %>
+            <li>No shopping lists yet.</li>
+        <% } %>
+    </ul>
+    <a href="/lists">Lists</a>
+</body>
+</html>

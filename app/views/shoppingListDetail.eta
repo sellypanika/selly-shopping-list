@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List: <%= it.shoppingList.name %></title>
+</head>
+<body>
+<% layout("./layouts/layout.eta") %>
+    <h1>Shopping List: <%= it.shoppingList.name %></h1>
+
+    <h2>Add an Item</h2>
+    <form method="POST" action="/lists/<%= it.shoppingList.id %>/items">
+        Name: <input type="text" name="name" required />
+        <input type="submit" value="Add Item" />
+    </form>
+
+    <h2>Items</h2>
+    <ul>
+        <% if (it.items && it.items.length > 0) { %>
+            <% it.items.sort((a, b) => a.name.localeCompare(b.name)); %>
+            <% it.items.forEach((item) => { %>
+                <li>
+                    <% if (item.collected) { %>
+                        <del><%= item.name %></del>
+                    <% } else { %>
+                        <%= item.name %>
+                        <form method="POST" action="/lists/<%= it.shoppingList.id %>/items/<%= item.id %>/collect" style="display:inline;">
+                            <input type="submit" value="Mark collected!" />
+                        </form>
+                    <% } %>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li>No items in this shopping list.</li>
+        <% } %>
+    </ul>
+
+    <a href="/lists">Back to Shopping Lists</a>
+</body>
+</html>
