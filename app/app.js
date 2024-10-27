@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { configure } from "https://deno.land/x/eta@v2.2.0/mod.ts";
-import * as shoppingListController from "./controllers/shoppingListController.js"; // Importing the controller
+import * as shoppingListController from "./controllers/shoppingListController.js";
 
 configure({
   views: `${Deno.cwd()}/views/`,
@@ -15,14 +15,13 @@ const handleRequest = async (request) => {
   const url = new URL(request.url);
 
   if (url.pathname === "/" && request.method === "GET") {
-    // Call the updated function and use its response to render the main page
-    return await shoppingListController.viewMainPage(request); // Correctly call viewMainPage here
+    return await shoppingListController.viewMainPage(request);
   } else if (url.pathname === "/lists" && request.method === "POST") {
     return await shoppingListController.addShoppingList(request);
   } else if (url.pathname === "/lists" && request.method === "GET") {
     return await shoppingListController.viewShoppingLists(request);
   } else if (url.pathname.startsWith("/lists/")) {
-    const _listId = url.pathname.split("/")[2]; // Extract the list ID from the URL
+    const _listId = url.pathname.split("/")[2];
 
     if (request.method === "GET") {
       return await shoppingListController.viewShoppingListById(request);
@@ -30,7 +29,7 @@ const handleRequest = async (request) => {
       if (url.pathname.endsWith("/deactivate")) {
         return await shoppingListController.deactivateShoppingList(request);
       } else if (url.pathname.endsWith("/collect")) {
-        return await shoppingListController.collectItem(request); // Correctly call collectItem from the controller
+        return await shoppingListController.collectItem(request);
       } else if (url.pathname.endsWith("/items")) {
         return await shoppingListController.addItemToShoppingList(request);
       }

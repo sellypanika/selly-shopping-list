@@ -45,7 +45,7 @@ const countAllShoppingLists = async () => {
 const countAllItems = async () => {
     const result =
         await sql`SELECT COUNT(*)::int AS count FROM shopping_list_items WHERE shopping_list_id IN (SELECT id FROM shopping_lists WHERE active = TRUE) `;
-    return result[0].count; // Access the count from the result structure
+    return result[0].count;
 };
 
 export {
@@ -54,7 +54,7 @@ export {
     countAllItems,
     countAllShoppingLists,
     create,
-    deactivate, // Export the new deactivate function
+    deactivate,
     findAllNonCompletedShoppingLists,
     findItemsByListId,
     findShoppingListById,
