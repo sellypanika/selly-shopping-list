@@ -14,6 +14,7 @@ services:
       - flyway
     env_file:
       - project.env
+    command: deno run --allow-env /app/main.ts
 
   database:
     container_name: database-server
