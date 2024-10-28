@@ -4,7 +4,7 @@ EXPOSE 7777
 
 WORKDIR /app
 
-COPY ./app /app
+COPY deps.js .
 
 RUN deno cache deps.js
 
