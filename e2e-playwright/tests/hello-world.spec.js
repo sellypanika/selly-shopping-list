@@ -14,7 +14,7 @@ test("Can view a single shopping list", async ({ page }) => {
 });
 
 test("Can add items to a shopping list", async ({ page }) => {
-  await page.goto("/lists/1"); // Assuming 1 is the ID of the shopping list
+  await page.goto("/lists/1");
   await page.locator("input[name='name']").type("Eggs");
   await page.locator("input[type=submit]").click();
   await expect(page.locator("ul")).toContainText("Eggs");
@@ -22,12 +22,12 @@ test("Can add items to a shopping list", async ({ page }) => {
 
 test("Can mark an item as collected", async ({ page }) => {
   await page.goto("/lists/1");
-  await page.locator("input[type=checkbox]").first().check(); // Assuming the first checkbox corresponds to the item
-  await expect(page.locator("li")).toHaveCSS("text-decoration", "line-through"); // Check if item is marked
+  await page.locator("input[type=checkbox]").first().check();
+  await expect(page.locator("li")).toHaveCSS("text-decoration", "line-through");
 });
 
 test("Can deactivate a shopping list", async ({ page }) => {
   await page.goto("/lists");
-  await page.locator("button >> text='Deactivate list!'").first().click(); // Assuming the button is for the first list
+  await page.locator("button >> text='Deactivate list!'").first().click();
   await expect(page.locator("ul")).not.toContainText("Grocery List");
 });

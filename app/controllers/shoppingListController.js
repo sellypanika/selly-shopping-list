@@ -53,7 +53,6 @@ const viewShoppingListById = async (request) => {
     const listId = url.pathname.split("/").pop();
 
     const shoppingList = await shoppingListService.findShoppingListById(listId);
-    console.log("Shopping List Retrieved:", shoppingList);
 
     if (!shoppingList) {
         return new Response("Shopping list not found", { status: 404 });
@@ -61,8 +60,6 @@ const viewShoppingListById = async (request) => {
 
     const items = await shoppingListService.findItemsByListId(listId);
     const data = { shoppingList, items };
-
-    console.log("Data being passed to the template:", data);
 
     return new Response(
         await renderFile("shoppingListDetail.eta", data),

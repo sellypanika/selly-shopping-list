@@ -1,3 +1,16 @@
+# Name
+
+Sharred shopping list
+
+# Description
+
+It is a shopping list where we can create shopping list, deactivate it, add
+items in a particular shopping list and mark items as collected.
+
+# online deployment
+
+https://selly-shopping-list.onrender.com/
+
 # Walking skeleton
 
 This is a walking skeleton -- a starting point for working on the course
