@@ -39,4 +39,4 @@ const handleRequest = async (request) => {
   return new Response("Not found", { status: 404 });
 };
 
-serve(handleRequest, { port: 7777 });
+serve(handleRequest, { port: 10000 });
